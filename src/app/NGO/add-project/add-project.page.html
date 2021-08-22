@@ -1,0 +1,121 @@
+<ion-header>
+    <ion-toolbar mode="ios">
+        <ion-buttons>
+            <ion-back-button mode="ios" text=""></ion-back-button>
+            <ion-title>Add project</ion-title>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row style="padding-right: 12px; padding-left: 12px;">
+        <ion-col size="12">
+            <ion-card class="withdrawCard">
+                <ion-row class="ion-justify-content-center">
+                    <ion-col size="11" class="py-0">
+                        <p class="font-15 mt-0 bold">Basic Info</p>
+                        <form [formGroup]="projectForm">
+                            <ion-item lines="none" mode="md" class="inputCont">
+                                <ion-label position="floating" class="my-0 gray">Name</ion-label>
+                                <ion-input formControlName="name" type="text" placeholder="Project Name"></ion-input>
+                            </ion-item>
+                            <ion-item lines="none" mode="md" class="inputCont">
+                                <ion-label position="floating" class="my-0 gray">No. of Dependents</ion-label>
+                                <ion-input type="number" placeholder="Dependents"
+                                           formControlName="dependents"></ion-input>
+                            </ion-item>
+                            <ion-item lines="none" mode="md" class="inputCont">
+                                <ion-label position="floating" class="my-0 gray">Start Date</ion-label>
+                                <ion-datetime placeholder="Start Date" formControlName="startDate"
+                                              displayFormat="DD/MM/YYYY" min="{{minDate}}"
+                                              max="{{maxDate}}"></ion-datetime>
+                            </ion-item>
+                            <ion-item lines="none" mode="md" class="inputCont">
+                                <ion-label position="floating" class="my-0 gray">End Date</ion-label>
+                                <ion-datetime placeholder="End Date" formControlName="endDate"
+                                              displayFormat="DD/MM/YYYY" min="{{minDate}}"
+                                              max="{{maxDate}}"></ion-datetime>
+                            </ion-item>
+                        </form>
+                    </ion-col>
+                </ion-row>
+                <div style="padding-top: 20px;">
+                    <form [formGroup]="donationForm">
+                        <ion-row class="justify-content-center">
+                            <ion-col size="12">
+                                <div class="ion-padding">
+                                    <p style="padding-left: 20px" class="font-15 mt-0 bold">Item Detail</p>
+                                    <ion-item lines="none" mode="md" class="inputCont">
+                                        <ion-label position="floating" class="my-0 gray">Item Name</ion-label>
+                                        <ion-input formControlName="itemName" type="text"
+                                                   placeholder="Item Name"></ion-input>
+                                    </ion-item>
+                                    <ion-item lines="none" mode="md" class="inputCont">
+                                        <ion-label position="floating" class="my-0 gray">Quantity</ion-label>
+                                        <ion-input type="number" placeholder="Quantity"
+                                                   formControlName="quantity"></ion-input>
+                                    </ion-item>
+                                    <ion-item lines="none" mode="md" class="inputCont">
+                                        <ion-label position="floating" class="my-0 gray">Quantity Unit
+                                        </ion-label>
+                                        <ion-select value="" formControlName="quantityUnit"
+                                                    placeholder="--Select--" okText="Okay" cancelText="Dismiss">
+                                            <ion-select-option *ngFor="let unit of units"
+                                                               value="{{unit}}">{{unit}}</ion-select-option>
+                                        </ion-select>
+                                    </ion-item>
+                                    <ion-item lines="none" mode="md" class="inputCont">
+                                        <ion-label position="floating" class="my-0 gray">Type</ion-label>
+                                        <ion-select value="" formControlName="type" placeholder="--Select--"
+                                                    okText="Okay" cancelText="Dismiss">
+                                            <ion-select-option *ngFor="let type of types"
+                                                               value="{{type}}">{{type}}</ion-select-option>
+                                        </ion-select>
+                                    </ion-item>
+                                    <div style="padding-top: 15px">
+                                        <ion-button [disabled]="donationForm.invalid" (click)="addDonationToList()"
+                                                    color="primary" type="submit" expand="block">Add Item
+                                        </ion-button>
+                                    </div>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                    </form>
+                </div>
+                <ion-row style="padding-top: 20px;" class="ion-justify-content-center">
+                    <ion-col size="12" class="py-0">
+                        <p *ngIf="donations.length" style="padding-left: 20px" class="font-15 mt-0 bold">Donation items
+                            List</p>
+                        <ion-card *ngFor="let donation of donations" style="text-transform: capitalize;"
+                                  class="ion-no-padding">
+                            <ion-item>
+                                <ion-label>Name - {{donation?.itemName}}</ion-label>
+                                <ion-icon *ngIf="donation?.show" (click)="expandDonation(donation)" slot="end"
+                                          name="chevron-up-sharp"></ion-icon>
+                                <ion-icon *ngIf="!donation?.show" (click)="expandDonation(donation)" slot="end"
+                                          name="chevron-down-sharp"></ion-icon>
+                            </ion-item>
+                            <ion-card-content class="ion-no-padding" *ngIf="donation?.show">
+                                <ion-item>
+                                    <ion-icon color="primary" name="bookmarks"></ion-icon>
+                                    <ion-label>
+                                        Quantity - {{donation?.quantityUnit}} {{donation?.quantity}}</ion-label>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-icon color="primary" name="bookmarks"></ion-icon>
+                                    <ion-label>
+                                        Type - {{donation?.type}}</ion-label>
+                                </ion-item>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+    <div class="ion-padding">
+        <ion-button [disabled]="projectForm.invalid" (click)="addDonation()" color="primary" type="submit"
+                    expand="block">Proceed
+        </ion-button>
+    </div>
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-toolbar mode="ios">
+        <ion-buttons>
+            <ion-back-button mode="ios" text=""></ion-back-button>
+            <ion-title>Add Donation</ion-title>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="donationForm">
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="11">
+                <ion-item lines="none" class="itemCont">
+                    <ion-input type="text" placeholder="Item Name" formControlName="name"></ion-input>
+                </ion-item>
+                <ion-item lines="none" class="itemCont">
+                    <ion-input type="number" placeholder="Quantity" formControlName="quantity"></ion-input>
+                </ion-item>
+                <ion-item lines="none" class="itemCont">
+                    <ion-label>Unit</ion-label>
+                    <ion-select value="" formControlName="quantityUnit" placeholder="--Select--" okText="Okay"
+                                cancelText="Dismiss">
+                        <ion-select-option *ngFor="let unit of units" value="{{unit}}">{{unit}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item lines="none" class="itemCont">
+                    <ion-label>Type</ion-label>
+                    <ion-select value="" formControlName="type" placeholder="--Select--" okText="Okay"
+                                cancelText="Dismiss">
+                        <ion-select-option *ngFor="let type of types" value="{{type}}">{{type}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-row class="itemCont">
+                    <ion-col size="6">
+                        <ion-button (click)="openCamera(1)" size="small" shape="round" expand="block">
+                            <ion-icon name="camera"></ion-icon>
+                            Camera
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-button (click)="openCamera(2)" size="small" shape="round" expand="block">
+                            <ion-icon name="image"></ion-icon>
+                            Gallery
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+                <ion-card *ngIf="picture">
+                    <img style="width: 500px; height: 300px" src="{{picture}}"/>
+                </ion-card>
+                <div style="padding-top: 10px">
+                    <ion-button *ngIf="user?.isDonor" [disabled]="donationForm.invalid" (click)="donate()"
+                                color="primary" type="submit"
+                                expand="block">Donate
+                    </ion-button>
+                    <ion-button *ngIf="user?.isNGO" [disabled]="donationForm.invalid" (click)="updateDonationList()"
+                                color="primary" type="submit"
+                                expand="block">Add Donation
+                    </ion-button>
+                </div>
+            </ion-col>
+        </ion-row>
+    </form>
+</ion-content>

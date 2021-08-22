@@ -1,0 +1,7 @@
+{
+  "name": "crowd-donate",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

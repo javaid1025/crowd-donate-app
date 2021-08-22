@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>Manage Users</ion-title>
+        <ion-icon color="primary" (click)="addUser()" name="add-circle" slot="end"
+                  size="large"></ion-icon>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row class="ion-justify-content-center">
+        <ion-col size="12">
+            <ion-list class="itemCont">
+                <ion-card style="text-transform: capitalize;" *ngFor="let item of users" class="itemCont">
+                    <ion-item lines="none">
+                        <div class="profile">
+                            <img class="userImg" [src]="item?.profileImage || 'assets/image.png'"/>
+                        </div>
+                        <ion-label style="padding-left: 15px">{{ item?.fullName}}</ion-label>
+                        <ion-icon color="secondary" name="mail" size="large" (click)="openChat(item?.email)"></ion-icon>
+                        <ion-icon *ngIf="item?.show" (click)="expandCLick(item)" slot="end"
+                                  name="chevron-up-sharp" color="primary"></ion-icon>
+                        <ion-icon *ngIf="!item?.show" (click)="expandCLick(item)" slot="end"
+                                  name="chevron-down-sharp" color="primary"></ion-icon>
+                    </ion-item>
+                    <ion-card-content class="ion-no-padding" *ngIf="item?.show">
+                        <ion-item>
+                            <ion-label>
+                                <ion-icon color="primary" name="mail" size="small"></ion-icon>
+                                Email: {{item?.email}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>
+                                <ion-icon color="primary" name="card" size="small"></ion-icon>
+                                Username:  {{item?.username}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <p>
+                                <ion-icon color="primary" name="call" size="small"></ion-icon>
+                                {{item?.phone}}</p>
+                        </ion-item>
+                        <ion-item *ngIf="item?.isDonor">
+                            <p>
+                                <ion-icon color="primary" name="card" size="small"></ion-icon>
+                                User Type: Donor
+                            </p>
+                        </ion-item>
+                        <ion-item *ngIf="item?.isNGO">
+                            <p>
+                                <ion-icon color="primary" name="bookmark" size="small"></ion-icon>
+                                Organization:  {{item?.orgName}}</p>
+                        </ion-item>
+                        <ion-item>
+                            <p>
+                                <ion-icon color="primary" name="home" size="small"></ion-icon>
+                                {{item?.address}} {{item?.city}}</p>
+                        </ion-item>
+                        <ion-row>
+                            <ion-col size="6">
+                                <ion-button (click)="editUser(item)" color="warning" size="small" expand="block">
+                                    <ion-icon color="primary" name="pencil-sharp"></ion-icon>
+                                    Edit
+                                </ion-button>
+                            </ion-col>
+                            <ion-col size="6">
+                                <ion-button (click)="deleteUser(item?.uid)" color="danger" size="small" expand="block">
+                                    <ion-icon  color="primary" name="trash"></ion-icon>
+                                    Delete
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+            </ion-list>
+        </ion-col>
+    </ion-row>
+</ion-content>

@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>Donations</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row class="ion-justify-content-center">
+        <ion-col size="11" class="py-0">
+            <ion-card *ngFor="let donation of donations" class="withdrawCard">
+                <ion-row>
+                    <ion-col size="3"><img style="width: 100px; height: 150px; padding-top: 85%"
+                                           src="{{donation?.image}}" alt=""/>
+                    </ion-col>
+                    <ion-col size="9">
+                        <ion-item lines="none">
+                            <h4>{{donation?.itemName}}</h4>
+                        </ion-item>
+                        <ion-item>
+                            <ion-icon color="primary" name="bookmarks"></ion-icon>
+                            <ion-label>
+                                Quantity - {{donation?.quantityUnit}} {{donation?.quantity}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-icon color="primary" name="calendar"></ion-icon>
+                            <ion-label>
+                                Donated At - {{donation?.time | date: 'dd-MM-yyyy'}}</ion-label>
+                        </ion-item>
+                        <ion-item lines="none">
+                            <ion-icon color="primary" name="calendar"></ion-icon>
+                            <ion-label>
+                                Type - {{donation?.type}}</ion-label>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-content>

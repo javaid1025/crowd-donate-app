@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "903770949561",
+    "firebase_url": "https://crowd-donate.firebaseio.com",
+    "project_id": "crowd-donate",
+    "storage_bucket": "crowd-donate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903770949561:android:9b7020c3ef521616f69868",
+        "android_client_info": {
+          "package_name": "com.ionic.cd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903770949561-4a653obpn5l3q967695etutkcv7jo0u2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB9o_srr6lNh-ASBeoZHvdLa4HYxAeRHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903770949561-4a653obpn5l3q967695etutkcv7jo0u2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
